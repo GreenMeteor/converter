@@ -1,0 +1,18 @@
+{
+    "id": "converter",
+    "version": "1.0.0",
+    "name": "SQL Converter",
+    "description": "Convert SQL into HumHub Database SQL.",
+    "humhub": {
+        "minVersion": "1.15"
+    },
+    "keywords": ["converter", "sql"],
+    "homepage": "https://greenmeteor.net",
+    "authors": [
+        {
+            "name": "Green Meteor",
+            "email": "hello@greenmeteor.net",
+            "role": "Owner"
+        }
+    ]
+}
