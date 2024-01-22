@@ -4,9 +4,10 @@ namespace gm\humhub\modules\converter;
 
 use Yii;
 use yii\base\Event;
+use yii\helpers\Url;
 use humhub\widgets\TopMenu;
 use humhub\modules\ui\menu\MenuLink;
-use yii\helpers\Url;
+use humhub\modules\user\models\Group;
 
 /**
  * Class Events
@@ -25,11 +26,17 @@ class Events
         /** @var TopMenu $menu */
         $menu = $event->sender;
 
-        $menu->addEntry(new MenuLink([
-            'label' => Yii::t('FaqModule.base', '<strong>SQL</strong> Converter'),
-            'icon' => 'fa-database',
-            'url' => Url::to(['/converter/sql-converter/index']),
-            'sortOrder' => 92000,
-        ]));
+        // If currently logged-in user is in admin group
+        $isAdmin = Group::getAdminGroup()->isMember(Yii::$app->user->identity);
+
+        // Only show the menu for users in admin group
+        if ($isAdmin) {
+            $menu->addEntry(new MenuLink([
+                'label' => Yii::t('FaqModule.base', '<strong>SQL</strong> Converter'),
+                'icon' => 'fa-database',
+                'url' => Url::to(['/converter/sql-converter/index']),
+                'sortOrder' => 92000,
+            ]));
+        }
     }
 }
